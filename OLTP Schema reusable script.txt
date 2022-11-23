@@ -1,0 +1,35 @@
+CREATE TABLE CUSTOMER_MASTER (
+Customerid int(100) PRIMARY KEY AUTO_INCREMENT,
+Name varchar(20) NOT NULL,
+Address varchar(40) NOT NULL,
+City varchar(20) NOT NULL,
+State varchar(20) NOT NULL,
+Pincode int(6) NOT NULL,
+Update_timestamp datetime NOT NULL
+);
+
+create table PRODUCT_MASTER (
+Productid int(100) primary key auto_increment,
+Productcode varchar(100) not null,
+Productname varchar(255) not null,
+Sku varchar(100) not null,
+Rate int(100) not null,
+Isactive varchar(5) not null
+);
+
+CREATE TABLE ORDER_DETAILS(
+Orderid int(100) PRIMARY KEY AUTO_INCREMENT,
+Customerid int(100) NOT NULL,
+Order_status_update_timestamp datetime NOT NULL,
+Order_status varchar(20) NOT NULL,
+FOREIGN KEY (Customerid) REFERENCES CUSTOMER_MASTER(Customerid)
+);
+
+
+CREATE TABLE ORDER_ITEMS(
+Orderid int(100) NOT NULL,
+Productid int(100) NOT NULL,
+Quantity int(255) NOT NULL,
+FOREIGN KEY (Orderid) REFERENCES ORDER_DETAILS(Orderid),
+FOREIGN KEY (Productid) REFERENCES PRODUCT_MASTER(Productid)
+);
